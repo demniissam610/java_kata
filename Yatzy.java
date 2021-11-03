@@ -87,7 +87,7 @@ public class Yatzy {
                 return 50;
         return 0;
          */
-        if (Arrays.stream(tallies).anyMatch(i -> i == 5)) {
+        if (Arrays.stream(tallies).anyMatch(x -> x == 5)) {
             return 50;
         }
         return 0;
@@ -104,7 +104,7 @@ public class Yatzy {
      * @return
      */
     private int getScore(int value) {
-        return Arrays.stream(dice).filter(i -> i == value).sum();
+        return Arrays.stream(dice).filter(x -> x == value).sum();
     }
 
     /**
@@ -249,13 +249,13 @@ public class Yatzy {
                 return (6-at)*2;
         return 0;
          */
-        return getSumOccurencesByNbOccurences(2).reduce((f, s) -> s).orElse(0);
+        return getSumOccurencesByNbOccurences(2).reduce((a, b) -> b).orElse(0);
     }
 
     /**
      * méthode non statique : on instanciera la classe et utilisera la méthode de l'objet au lieu de l'appeler via la classe
      * On n'a pas besoin de paramètres, on utiliseras l'attribut qui contient le nombre d'occurence pour chaque valeur obtenue
-     * retourne la somme des pairs si on a 2 paires
+     * retourne la somme des pairs si on a exactement 2 paires sinon 0
      *
      * @return
      */
@@ -279,7 +279,8 @@ public class Yatzy {
         else
             return 0;
          */
-        return getSumOccurencesByNbOccurences(2).count() == 2 ? getSumOccurencesByNbOccurences(2).sum() : 0;
+        IntStream sumOccurencesByNbOccurences = getSumOccurencesByNbOccurences(2);
+        return sumOccurencesByNbOccurences.count() == 2 ? sumOccurencesByNbOccurences.sum() : 0;
     }
 
     /**
@@ -341,7 +342,7 @@ public class Yatzy {
      * @return
      */
     private IntStream getSumOccurencesByNbOccurences(int nb) {
-        return getOccurencesByOccurence(nb).map(i -> (i + 1) * nb);
+        return getOccurencesByOccurence(nb).map(x -> (x + 1) * nb);
     }
 
     /**
@@ -355,7 +356,7 @@ public class Yatzy {
      * @return
      */
     private IntStream getOccurencesByOccurence(int nb) {
-        return IntStream.range(0, tallies.length).filter(i -> tallies[i] >= nb);
+        return IntStream.range(0, tallies.length).filter(x -> tallies[x] >= nb);
     }
 
     /**
@@ -383,7 +384,7 @@ public class Yatzy {
             return 15;
         return 0;
          */
-        if (Arrays.stream(tallies).limit(5).allMatch(i -> i == 1)) {
+        if (Arrays.stream(tallies).limit(5).allMatch(x -> x == 1)) {
             return 15;
         }
         return 0;
@@ -414,7 +415,7 @@ public class Yatzy {
             return 20;
         return 0;
          */
-        if (Arrays.stream(tallies).skip(1).allMatch(i -> i == 1)) {
+        if (Arrays.stream(tallies).skip(1).allMatch(x -> x == 1)) {
             return 20;
         }
         return 0;
@@ -465,9 +466,6 @@ public class Yatzy {
         else
             return 0;
          */
-        return Arrays.stream(tallies).filter(i -> i == 0).count() == 4 ? getOccurencesByOccurence(2).map(i -> (i + 1) * tallies[i]).sum() : 0;
+        return Arrays.stream(tallies).filter(x -> x == 0).count() == 4 ? getOccurencesByOccurence(2).map(x -> (x + 1) * tallies[x]).sum() : 0;
     }
 }
-
-
-
