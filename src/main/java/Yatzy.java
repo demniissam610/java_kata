@@ -279,8 +279,7 @@ public class Yatzy {
         else
             return 0;
          */
-        IntStream sumOccurencesByNbOccurences = getSumOccurencesByNbOccurences(2);
-        return sumOccurencesByNbOccurences.count() == 2 ? sumOccurencesByNbOccurences.sum() : 0;
+        return getSumOccurencesByNbOccurences(2).count() == 2 ? getSumOccurencesByNbOccurences(2).sum() : 0;
     }
 
     /**
